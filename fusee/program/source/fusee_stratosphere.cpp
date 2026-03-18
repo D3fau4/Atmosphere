@@ -180,6 +180,18 @@ namespace ams::nxboot {
             FsVersion_19_0_0,
             FsVersion_19_0_0_Exfat,
 
+            FsVersion_20_0_0,
+            FsVersion_20_0_0_Exfat,
+
+            FsVersion_20_1_0,
+            FsVersion_20_1_0_Exfat,
+
+            FsVersion_21_0_0,
+            FsVersion_21_0_0_Exfat,
+
+            FsVersion_21_2_0,
+            FsVersion_21_2_0_Exfat,
+
             FsVersion_Count,
         };
 
@@ -272,6 +284,18 @@ namespace ams::nxboot {
 
             { 0xD9, 0x4C, 0x68, 0x15, 0xF8, 0xF5, 0x0A, 0x20 }, /* FsVersion_19_0_0 */
             { 0xED, 0xA8, 0x78, 0x68, 0xA4, 0x49, 0x07, 0x50 }, /* FsVersion_19_0_0_Exfat */
+
+            { 0x63, 0x54, 0x96, 0x9E, 0x60, 0xA7, 0x97, 0x7B }, /* FsVersion_20_0_0 */
+            { 0x47, 0x41, 0x07, 0x10, 0x65, 0x4F, 0xA4, 0x3F }, /* FsVersion_20_0_0_Exfat */
+
+            { 0xED, 0x34, 0xB4, 0x50, 0x58, 0x4A, 0x5B, 0x43 }, /* FsVersion_20_1_0 */
+            { 0xA5, 0x1A, 0xA4, 0x92, 0x6C, 0x41, 0x87, 0x59 }, /* FsVersion_20_1_0_Exfat */
+
+            { 0xEE, 0x4B, 0x30, 0x12, 0xA6, 0x84, 0x02, 0x25 }, /* FsVersion_21_0_0 */
+            { 0x6E, 0x2B, 0xD9, 0xBA, 0xA3, 0xB9, 0x10, 0xF1 }, /* FsVersion_21_0_0_Exfat */
+
+            { 0xAF, 0x1D, 0xBD, 0xC7, 0x82, 0x98, 0x3C, 0xBD }, /* FsVersion_21_2_0 */
+            { 0x56, 0x25, 0x17, 0xA1, 0x92, 0xC3, 0xC8, 0xF0 }, /* FsVersion_21_2_0_Exfat */
         };
 
         const InitialProcessBinaryHeader *FindInitialProcessBinary(const pkg2::Package2Header *header, const u8 *data, ams::TargetFirmware target_firmware) {
@@ -660,6 +684,30 @@ namespace ams::nxboot {
                     AddPatch(fs_meta, 0x1A14A5, NogcPatch0, sizeof(NogcPatch0));
                     AddPatch(fs_meta, 0x1A16A5, NogcPatch0, sizeof(NogcPatch0));
                     AddPatch(fs_meta, 0x17A9A0, NogcPatch1, sizeof(NogcPatch1));
+                    break;
+                case FsVersion_20_0_0:
+                case FsVersion_20_1_0:
+                    AddPatch(fs_meta, 0x1A7E25, NogcPatch0, sizeof(NogcPatch0));
+                    AddPatch(fs_meta, 0x1A8025, NogcPatch0, sizeof(NogcPatch0));
+                    AddPatch(fs_meta, 0x17C250, NogcPatch1, sizeof(NogcPatch1));
+                    break;
+                case FsVersion_20_0_0_Exfat:
+                case FsVersion_20_1_0_Exfat:
+                    AddPatch(fs_meta, 0x1B3745, NogcPatch0, sizeof(NogcPatch0));
+                    AddPatch(fs_meta, 0x1B3945, NogcPatch0, sizeof(NogcPatch0));
+                    AddPatch(fs_meta, 0x187B70, NogcPatch1, sizeof(NogcPatch1));
+                    break;
+                case FsVersion_21_0_0:
+                case FsVersion_21_2_0:
+                    AddPatch(fs_meta, 0x1AC9ED, NogcPatch0, sizeof(NogcPatch0));
+                    AddPatch(fs_meta, 0x1ACA05 , NogcPatch0, sizeof(NogcPatch0));
+                    AddPatch(fs_meta, 0x17FBE0, NogcPatch1, sizeof(NogcPatch1));
+                    break;
+                case FsVersion_21_0_0_Exfat:
+                case FsVersion_21_2_0_Exfat:
+                    AddPatch(fs_meta, 0x1B7B4D, NogcPatch0, sizeof(NogcPatch0));
+                    AddPatch(fs_meta, 0x1B7B65, NogcPatch0, sizeof(NogcPatch0));
+                    AddPatch(fs_meta, 0x18AD40, NogcPatch1, sizeof(NogcPatch1));
                     break;
                 default:
                     break;

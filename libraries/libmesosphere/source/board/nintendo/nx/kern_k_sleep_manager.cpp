@@ -441,7 +441,7 @@ namespace ams::kern::board::nintendo::nx {
             KThread::Register(new_thread);
 
             /* Run the thread. */
-            new_thread->Run();
+            MESOSPHERE_R_ABORT_UNLESS(new_thread->Run());
         }
     }
 
@@ -523,6 +523,14 @@ namespace ams::kern::board::nintendo::nx {
 
                 /* Ensure that all cores get to this point before continuing. */
                 cpu::SynchronizeAllCores();
+
+                /* Wait 100us before continuing. */
+                {
+                    const s64 timeout = KHardwareTimer::GetTick() + ams::svc::Tick(TimeSpan::FromMicroSeconds(100));
+                    while (KHardwareTimer::GetTick() < timeout) {
+                        __asm__ __volatile__("" ::: "memory");
+                    }
+                }
 
                 /* Save the interrupt manager's state. */
                 Kernel::GetInterruptManager().Save(core_id);

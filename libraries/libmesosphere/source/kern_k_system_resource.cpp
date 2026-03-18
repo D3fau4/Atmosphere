@@ -42,7 +42,7 @@ namespace ams::kern {
         R_UNLESS(m_resource_size > rc_size, svc::ResultOutOfMemory());
 
         /* Initialize slab heaps. */
-        m_dynamic_page_manager.Initialize(m_resource_address + rc_size, m_resource_size - rc_size, PageSize);
+        R_TRY(m_dynamic_page_manager.Initialize(m_resource_address + rc_size, m_resource_size - rc_size, PageSize));
         m_page_table_heap.Initialize(std::addressof(m_dynamic_page_manager), 0, GetPointer<KPageTableManager::RefCount>(m_resource_address));
         m_memory_block_heap.Initialize(std::addressof(m_dynamic_page_manager), 0);
         m_block_info_heap.Initialize(std::addressof(m_dynamic_page_manager), 0);
@@ -59,7 +59,9 @@ namespace ams::kern {
         memory_reservation.Commit();
 
         /* Open reference to our resource limit. */
-        m_resource_limit->Open();
+        if (m_resource_limit != nullptr) {
+            m_resource_limit->Open();
+        }
 
         /* Set ourselves as initialized. */
         m_is_initialized = true;
@@ -76,11 +78,14 @@ namespace ams::kern {
         /* Free our secure memory. */
         KSystemControl::FreeSecureMemory(m_resource_address, m_resource_size, m_resource_pool);
 
-        /* Release the memory reservation. */
-        m_resource_limit->Release(ams::svc::LimitableResource_PhysicalMemoryMax, this->CalculateRequiredSecureMemorySize());
+        /* Clean up our resource usage. */
+        if (m_resource_limit != nullptr) {
+            /* Release the memory reservation. */
+            m_resource_limit->Release(ams::svc::LimitableResource_PhysicalMemoryMax, this->CalculateRequiredSecureMemorySize());
 
-        /* Close reference to our resource limit. */
-        m_resource_limit->Close();
+            /* Close reference to our resource limit. */
+            m_resource_limit->Close();
+        }
     }
 
     size_t KSecureSystemResource::CalculateRequiredSecureMemorySize(size_t size, KMemoryManager::Pool pool) {

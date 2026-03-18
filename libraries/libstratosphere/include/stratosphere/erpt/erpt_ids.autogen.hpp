@@ -165,14 +165,14 @@
     HANDLER(NvHostErrInfo,                       124 ) \
     HANDLER(RunningUlaInfo,                      125 ) \
     HANDLER(InternalPanelInfo,                   126 ) \
-    HANDLER(ResourceLimitLimitInfo,              127 ) \
-    HANDLER(ResourceLimitPeakInfo,               128 ) \
+    HANDLER(ResourceLimitInfo,                   127 ) \
+    HANDLER(ResourceLimitPeakInfoDeprecated,     128 ) \
     HANDLER(TouchScreenInfo,                     129 ) \
     HANDLER(AcpUserAccountSettingsInfo,          130 ) \
     HANDLER(AudioDeviceInfo,                     131 ) \
     HANDLER(AbnormalWakeInfo,                    132 ) \
     HANDLER(ServiceProfileInfo,                  133 ) \
-    HANDLER(BluetoothAudioInfo,                  134 ) \
+    HANDLER(BluetoothAudioInfoDeprecated,        134 ) \
     HANDLER(BluetoothPairingCountInfo,           135 ) \
     HANDLER(FsProxyErrorInfo2,                   136 ) \
     HANDLER(BuiltInWirelessOUIInfo,              137 ) \
@@ -181,9 +181,24 @@
     HANDLER(NANDTypeInfoDeprecated,              140 ) \
     HANDLER(MicroSDTypeInfo,                     141 ) \
     HANDLER(AttachmentFileInfo,                  142 ) \
+    HANDLER(WlanInfo,                            143 ) \
+    HANDLER(HalfAwakeStateInfo,                  144 ) \
+    HANDLER(PctlSettingInfo,                     145 ) \
+    HANDLER(GameCardLogInfo,                     146 ) \
+    HANDLER(WlanIoctlErrorInfo,                  147 ) \
+    HANDLER(SdCardActivationInfo,                148 ) \
+    HANDLER(GameCardDetailedErrorInfo,           149 ) \
+    HANDLER(NetworkInfo2,                        150 ) \
+    HANDLER(SystemSettingInfo,                   151 ) \
+    HANDLER(MigrationStateInfo,                  152 ) \
+    HANDLER(WinVdInfo,                           153 ) \
+    HANDLER(PscTransitionStateInfo,              154 ) \
+    HANDLER(FsProxyErrorInfo3,                   155 ) \
+    HANDLER(BluetoothErrorInfo,                  156 ) \
     HANDLER(TestNx,                              1000) \
     HANDLER(NANDTypeInfo,                        1001) \
     HANDLER(NANDExtendedCsd,                     1002) \
+    HANDLER(BluetoothAudioInfo,                  1003)
 
 #define AMS_ERPT_FOREACH_FIELD(HANDLER) \
     HANDLER(TestU64,                                                  0,    Test,                                FieldType_NumericU64, FieldFlag_None   ) \
@@ -342,7 +357,7 @@
     HANDLER(TemperaturePcb,                                           153,  ThermalInfo,                         FieldType_NumericI32, FieldFlag_None   ) \
     HANDLER(TemperatureSoc,                                           154,  ThermalInfo,                         FieldType_NumericI32, FieldFlag_None   ) \
     HANDLER(CurrentFanDuty,                                           155,  ThermalInfo,                         FieldType_NumericI32, FieldFlag_None   ) \
-    HANDLER(LastDvfsThresholdTripped,                                 156,  ThermalInfo,                         FieldType_NumericI32, FieldFlag_None   ) \
+    HANDLER(LastDvfsThresholdTrippedDeprecated,                       156,  ThermalInfo,                         FieldType_NumericI32, FieldFlag_None   ) \
     HANDLER(CradlePdcHFwVersion,                                      157,  CradleFirmwareInfo,                  FieldType_NumericU32, FieldFlag_None   ) \
     HANDLER(CradlePdcAFwVersion,                                      158,  CradleFirmwareInfo,                  FieldType_NumericU32, FieldFlag_None   ) \
     HANDLER(CradleMcuFwVersion,                                       159,  CradleFirmwareInfo,                  FieldType_NumericU32, FieldFlag_None   ) \
@@ -448,7 +463,7 @@
     HANDLER(AdspExceptionStackAddressDeprecated,                      259,  AdspErrorInfo,                       FieldType_NumericU32, FieldFlag_None   ) \
     HANDLER(AdspExceptionStackDumpDeprecated,                         260,  AdspErrorInfo,                       FieldType_U32Array,   FieldFlag_None   ) \
     HANDLER(AdspExceptionReasonDeprecated,                            261,  AdspErrorInfo,                       FieldType_NumericU32, FieldFlag_None   ) \
-    HANDLER(OscillatorClock,                                          262,  PowerClockInfo,                      FieldType_NumericU32, FieldFlag_None   ) \
+    HANDLER(OscillatorClockDeprecated,                                262,  PowerClockInfo,                      FieldType_NumericU32, FieldFlag_None   ) \
     HANDLER(CpuDvfsTableClocksDeprecated,                             263,  PowerClockInfo,                      FieldType_U32Array,   FieldFlag_None   ) \
     HANDLER(CpuDvfsTableVoltagesDeprecated,                           264,  PowerClockInfo,                      FieldType_I32Array,   FieldFlag_None   ) \
     HANDLER(GpuDvfsTableClocksDeprecated,                             265,  PowerClockInfo,                      FieldType_U32Array,   FieldFlag_None   ) \
@@ -456,8 +471,8 @@
     HANDLER(EmcDvfsTableClocksDeprecated,                             267,  PowerClockInfo,                      FieldType_U32Array,   FieldFlag_None   ) \
     HANDLER(EmcDvfsTableVoltagesDeprecated,                           268,  PowerClockInfo,                      FieldType_I32Array,   FieldFlag_None   ) \
     HANDLER(ModuleClockFrequencies,                                   269,  PowerClockInfo,                      FieldType_U32Array,   FieldFlag_None   ) \
-    HANDLER(ModuleClockEnableFlags,                                   270,  PowerClockInfo,                      FieldType_U8Array,    FieldFlag_None   ) \
-    HANDLER(ModulePowerEnableFlags,                                   271,  PowerClockInfo,                      FieldType_U8Array,    FieldFlag_None   ) \
+    HANDLER(ModuleClockEnableFlagsDeprecated,                         270,  PowerClockInfo,                      FieldType_U8Array,    FieldFlag_None   ) \
+    HANDLER(ModulePowerEnableFlagsDeprecated,                         271,  PowerClockInfo,                      FieldType_U8Array,    FieldFlag_None   ) \
     HANDLER(ModuleResetAssertFlags,                                   272,  PowerClockInfo,                      FieldType_U8Array,    FieldFlag_None   ) \
     HANDLER(ModuleMinimumVoltageClockRates,                           273,  PowerClockInfo,                      FieldType_U32Array,   FieldFlag_None   ) \
     HANDLER(PowerDomainEnableFlagsDeprecated,                         274,  PowerClockInfo,                      FieldType_U8Array,    FieldFlag_None   ) \
@@ -726,7 +741,7 @@
     HANDLER(EncryptedExceptionInfo2,                                  537,  ErrorInfo,                           FieldType_U8Array,    FieldFlag_None   ) \
     HANDLER(EncryptedExceptionInfo3,                                  538,  ErrorInfo,                           FieldType_U8Array,    FieldFlag_None   ) \
     HANDLER(EncryptedDyingMessage,                                    539,  ErrorInfo,                           FieldType_U8Array,    FieldFlag_None   ) \
-    HANDLER(DramId,                                                   540,  PowerClockInfo,                      FieldType_NumericU32, FieldFlag_None   ) \
+    HANDLER(DramIdDeprecated,                                         540,  PowerClockInfo,                      FieldType_NumericU32, FieldFlag_None   ) \
     HANDLER(NifmConnectionTestRedirectUrl,                            541,  NifmConnectionTestInfo,              FieldType_String,     FieldFlag_None   ) \
     HANDLER(AcpRequiredNetworkServiceLicenseOnLaunchFlag,             542,  AcpUserAccountSettingsInfo,          FieldType_NumericU8,  FieldFlag_None   ) \
     HANDLER(PciePort0Flags,                                           543,  PcieLoggedStateInfo,                 FieldType_NumericU32, FieldFlag_None   ) \
@@ -804,16 +819,16 @@
     HANDLER(ErrorContext,                                             615,  ErrorInfoAuto,                       FieldType_U8Array,    FieldFlag_None   ) \
     HANDLER(ErrorContextSize,                                         616,  ErrorInfoAuto,                       FieldType_NumericU64, FieldFlag_None   ) \
     HANDLER(ErrorContextTotalSize,                                    617,  ErrorInfoAuto,                       FieldType_NumericU64, FieldFlag_None   ) \
-    HANDLER(SystemPhysicalMemoryLimit,                                618,  ResourceLimitLimitInfo,              FieldType_NumericI64, FieldFlag_None   ) \
-    HANDLER(SystemThreadCountLimit,                                   619,  ResourceLimitLimitInfo,              FieldType_NumericI64, FieldFlag_None   ) \
-    HANDLER(SystemEventCountLimit,                                    620,  ResourceLimitLimitInfo,              FieldType_NumericI64, FieldFlag_None   ) \
-    HANDLER(SystemTransferMemoryCountLimit,                           621,  ResourceLimitLimitInfo,              FieldType_NumericI64, FieldFlag_None   ) \
-    HANDLER(SystemSessionCountLimit,                                  622,  ResourceLimitLimitInfo,              FieldType_NumericI64, FieldFlag_None   ) \
-    HANDLER(SystemPhysicalMemoryPeak,                                 623,  ResourceLimitPeakInfo,               FieldType_NumericI64, FieldFlag_None   ) \
-    HANDLER(SystemThreadCountPeak,                                    624,  ResourceLimitPeakInfo,               FieldType_NumericI64, FieldFlag_None   ) \
-    HANDLER(SystemEventCountPeak,                                     625,  ResourceLimitPeakInfo,               FieldType_NumericI64, FieldFlag_None   ) \
-    HANDLER(SystemTransferMemoryCountPeak,                            626,  ResourceLimitPeakInfo,               FieldType_NumericI64, FieldFlag_None   ) \
-    HANDLER(SystemSessionCountPeak,                                   627,  ResourceLimitPeakInfo,               FieldType_NumericI64, FieldFlag_None   ) \
+    HANDLER(SystemPhysicalMemoryLimit,                                618,  ResourceLimitInfo,                   FieldType_NumericI64, FieldFlag_None   ) \
+    HANDLER(SystemThreadCountLimit,                                   619,  ResourceLimitInfo,                   FieldType_NumericI64, FieldFlag_None   ) \
+    HANDLER(SystemEventCountLimit,                                    620,  ResourceLimitInfo,                   FieldType_NumericI64, FieldFlag_None   ) \
+    HANDLER(SystemTransferMemoryCountLimit,                           621,  ResourceLimitInfo,                   FieldType_NumericI64, FieldFlag_None   ) \
+    HANDLER(SystemSessionCountLimit,                                  622,  ResourceLimitInfo,                   FieldType_NumericI64, FieldFlag_None   ) \
+    HANDLER(SystemPhysicalMemoryPeak,                                 623,  ResourceLimitInfo,                   FieldType_NumericI64, FieldFlag_None   ) \
+    HANDLER(SystemThreadCountPeak,                                    624,  ResourceLimitInfo,                   FieldType_NumericI64, FieldFlag_None   ) \
+    HANDLER(SystemEventCountPeak,                                     625,  ResourceLimitInfo,                   FieldType_NumericI64, FieldFlag_None   ) \
+    HANDLER(SystemTransferMemoryCountPeak,                            626,  ResourceLimitInfo,                   FieldType_NumericI64, FieldFlag_None   ) \
+    HANDLER(SystemSessionCountPeak,                                   627,  ResourceLimitInfo,                   FieldType_NumericI64, FieldFlag_None   ) \
     HANDLER(GpuCrashHash,                                             628,  GpuCrashInfo,                        FieldType_U8Array,    FieldFlag_None   ) \
     HANDLER(TouchScreenPanelGpioValue,                                629,  TouchScreenInfo,                     FieldType_NumericU8,  FieldFlag_None   ) \
     HANDLER(BrowserCertificateHostName,                               630,  ErrorInfo,                           FieldType_String,     FieldFlag_None   ) \
@@ -832,7 +847,7 @@
     HANDLER(SupportingLimitedApplicationLicenses,                     643,  RunningApplicationInfo,              FieldType_NumericU32, FieldFlag_None   ) \
     HANDLER(RuntimeLimitedApplicationLicenseUpgrade,                  644,  RunningApplicationInfo,              FieldType_NumericU8,  FieldFlag_None   ) \
     HANDLER(ServiceProfileRevisionKey,                                645,  ServiceProfileInfo,                  FieldType_NumericU64, FieldFlag_None   ) \
-    HANDLER(BluetoothAudioConnectionCount,                            646,  BluetoothAudioInfo,                  FieldType_NumericU8,  FieldFlag_None   ) \
+    HANDLER(BluetoothAudioConnectionCountDeprecated,                  646,  BluetoothAudioInfoDeprecated,        FieldType_NumericU8,  FieldFlag_None   ) \
     HANDLER(BluetoothHidPairingInfoCountDeprecated,                   647,  BluetoothPairingCountInfo,           FieldType_NumericU8,  FieldFlag_None   ) \
     HANDLER(BluetoothAudioPairingInfoCountDeprecated,                 648,  BluetoothPairingCountInfo,           FieldType_NumericU8,  FieldFlag_None   ) \
     HANDLER(BluetoothLePairingInfoCountDeprecated,                    649,  BluetoothPairingCountInfo,           FieldType_NumericU8,  FieldFlag_None   ) \
@@ -881,6 +896,84 @@
     HANDLER(LastConnectionTestDownloadSpeed64,                        692,  ConnectionInfo,                      FieldType_NumericU64, FieldFlag_None   ) \
     HANDLER(LastConnectionTestUploadSpeed64,                          693,  ConnectionInfo,                      FieldType_NumericU64, FieldFlag_None   ) \
     HANDLER(EncryptionKeyV1,                                          694,  ErrorInfo,                           FieldType_U8Array,    FieldFlag_None   ) \
+    HANDLER(GpuCrashDumpAttachmentId,                                 695,  GpuCrashInfo,                        FieldType_U8Array,    FieldFlag_None   ) \
+    HANDLER(GpuCrashDumpIsAttached,                                   696,  AttachmentFileInfo,                  FieldType_Bool,       FieldFlag_None   ) \
+    HANDLER(CallerIdentifier,                                         697,  ErrorInfo,                           FieldType_NumericU64, FieldFlag_None   ) \
+    HANDLER(WlanMainState,                                            698,  WlanInfo,                            FieldType_NumericU8,  FieldFlag_None   ) \
+    HANDLER(WlanSubState,                                             699,  WlanInfo,                            FieldType_NumericU8,  FieldFlag_None   ) \
+    HANDLER(AdspSyslogIsAttached,                                     702,  AttachmentFileInfo,                  FieldType_Bool,       FieldFlag_None   ) \
+    HANDLER(LastHalfAwakeTime,                                        703,  HalfAwakeStateInfo,                  FieldType_NumericI64, FieldFlag_None   ) \
+    HANDLER(LastHalfAwakeTimeAfterBackgroundTaskDone,                 704,  HalfAwakeStateInfo,                  FieldType_NumericI64, FieldFlag_None   ) \
+    HANDLER(LastHalfAwakeTimeAfterStateUnlocked,                      705,  HalfAwakeStateInfo,                  FieldType_NumericI64, FieldFlag_None   ) \
+    HANDLER(LastHalfAwakePowerStateMessage,                           706,  HalfAwakeStateInfo,                  FieldType_NumericI32, FieldFlag_None   ) \
+    HANDLER(FastlyRequestId,                                          707,  ErrorInfo,                           FieldType_String,     FieldFlag_None   ) \
+    HANDLER(CloudflareCfRay,                                          708,  ErrorInfo,                           FieldType_String,     FieldFlag_None   ) \
+    HANDLER(WlanCommandEventHistory,                                  709,  WlanInfo,                            FieldType_U8Array,    FieldFlag_None   ) \
+    HANDLER(FsSaveDataAttributeCheckFailureCount,                     710,  FsProxyErrorInfo2,                   FieldType_NumericU8,  FieldFlag_None   ) \
+    HANDLER(PctlIsRestrictionEnabled,                                 711,  PctlSettingInfo,                     FieldType_Bool,       FieldFlag_None   ) \
+    HANDLER(PctlIsPairingActive,                                      712,  PctlSettingInfo,                     FieldType_Bool,       FieldFlag_None   ) \
+    HANDLER(PctlSafetyLevel,                                          713,  PctlSettingInfo,                     FieldType_NumericU8,  FieldFlag_None   ) \
+    HANDLER(PctlRatingAge,                                            714,  PctlSettingInfo,                     FieldType_NumericU8,  FieldFlag_None   ) \
+    HANDLER(PctlRatingOrganization,                                   715,  PctlSettingInfo,                     FieldType_NumericU8,  FieldFlag_None   ) \
+    HANDLER(PctlIsSnsPostRestricted,                                  716,  PctlSettingInfo,                     FieldType_Bool,       FieldFlag_None   ) \
+    HANDLER(PctlIsFreeCommunicationRestrictedByDefault,               717,  PctlSettingInfo,                     FieldType_Bool,       FieldFlag_None   ) \
+    HANDLER(PctlIsStereoVisionRestricted,                             718,  PctlSettingInfo,                     FieldType_Bool,       FieldFlag_None   ) \
+    HANDLER(PctlRestrictedFreeCommunicationApplicationIdList,         719,  PctlSettingInfo,                     FieldType_U64Array,   FieldFlag_None   ) \
+    HANDLER(PctlExemptApplicationIdList,                              720,  PctlSettingInfo,                     FieldType_U64Array,   FieldFlag_None   ) \
+    HANDLER(GameCardLogEncryptionKeyIndex,                            721,  GameCardLogInfo,                     FieldType_NumericU32, FieldFlag_None   ) \
+    HANDLER(GameCardLogEncryptedKey,                                  722,  GameCardLogInfo,                     FieldType_U8Array,    FieldFlag_None   ) \
+    HANDLER(GameCardAsicHandlerLogLength,                             723,  GameCardLogInfo,                     FieldType_NumericU32, FieldFlag_None   ) \
+    HANDLER(GameCardWorkerLogLength,                                  724,  GameCardLogInfo,                     FieldType_NumericU32, FieldFlag_None   ) \
+    HANDLER(GameCardAsicHandlerLogTimeStamp,                          725,  GameCardLogInfo,                     FieldType_NumericI64, FieldFlag_None   ) \
+    HANDLER(GameCardWorkerLogTimeStamp,                               726,  GameCardLogInfo,                     FieldType_NumericI64, FieldFlag_None   ) \
+    HANDLER(GameCardEncryptedAsicHandlerLog,                          727,  GameCardLogInfo,                     FieldType_U8Array,    FieldFlag_None   ) \
+    HANDLER(GameCardEncryptedWorkerLog,                               728,  GameCardLogInfo,                     FieldType_U8Array,    FieldFlag_None   ) \
+    HANDLER(WlanIoctlErrno,                                           729,  ErrorInfo,                           FieldType_NumericI32, FieldFlag_None   ) \
+    HANDLER(FsSaveDataCertificateVerificationFailureCount,            730,  FsProxyErrorInfo2,                   FieldType_NumericU8,  FieldFlag_None   ) \
+    HANDLER(SdCardActivationMilliSeconds,                             731,  SdCardActivationInfo,                FieldType_NumericU32, FieldFlag_None   ) \
+    HANDLER(GameCardLastAwakenFailureResult,                          732,  GameCardDetailedErrorInfo,           FieldType_NumericU32, FieldFlag_None   ) \
+    HANDLER(GameCardInsertedTimestamp,                                733,  GameCardDetailedErrorInfo,           FieldType_NumericI64, FieldFlag_None   ) \
+    HANDLER(GameCardPreviousInsertedTimestamp,                        734,  GameCardDetailedErrorInfo,           FieldType_NumericI64, FieldFlag_None   ) \
+    HANDLER(WlanChipResetTriggered,                                   735,  WlanInfo,                            FieldType_Bool,       FieldFlag_None   ) \
+    HANDLER(NANDNumReadFailures,                                      736,  NANDErrorInfo,                       FieldType_NumericU32, FieldFlag_None   ) \
+    HANDLER(NANDNumReadRecoveries,                                    737,  NANDErrorInfo,                       FieldType_NumericU32, FieldFlag_None   ) \
+    HANDLER(NANDNumWriteFailures,                                     738,  NANDErrorInfo,                       FieldType_NumericU32, FieldFlag_None   ) \
+    HANDLER(NANDNumWriteRecoveries,                                   739,  NANDErrorInfo,                       FieldType_NumericU32, FieldFlag_None   ) \
+    HANDLER(WlanCommandEventHistoryV2,                                740,  WlanInfo,                            FieldType_U8Array,    FieldFlag_None   ) \
+    HANDLER(WlanChipResetReason,                                      741,  ErrorInfo,                           FieldType_NumericI32, FieldFlag_None   ) \
+    HANDLER(WlanAssertDumpData,                                       742,  ErrorInfo,                           FieldType_U8Array,    FieldFlag_None   ) \
+    HANDLER(ApplicationErrorFlag,                                     743,  ApplicationInfo,                     FieldType_Bool,       FieldFlag_None   ) \
+    HANDLER(FsOrphanedSaveDataTotalSize,                              744,  FsProxyErrorInfo2,                   FieldType_NumericU32, FieldFlag_None   ) \
+    HANDLER(FsOrphanedSaveDataCount,                                  745,  FsProxyErrorInfo2,                   FieldType_NumericU16, FieldFlag_None   ) \
+    HANDLER(MigrationType,                                            746,  MigrationStateInfo,                  FieldType_NumericU8,  FieldFlag_None   ) \
+    HANDLER(MigrationResumeCount,                                     747,  MigrationStateInfo,                  FieldType_NumericU8,  FieldFlag_None   ) \
+    HANDLER(MigrationStateData,                                       748,  MigrationStateInfo,                  FieldType_U8Array,    FieldFlag_None   ) \
+    HANDLER(WinVdPcEnvironment,                                       749,  WinVdInfo,                           FieldType_String,     FieldFlag_None   ) \
+    HANDLER(PscBlockingPmModuleList,                                  750,  PscTransitionStateInfo,              FieldType_U32Array,   FieldFlag_None   ) \
+    HANDLER(CrashReportFlag,                                          751,  ErrorInfo,                           FieldType_Bool,       FieldFlag_None   ) \
+    HANDLER(TouchScreenPanelVendor,                                   752,  TouchScreenInfo,                     FieldType_NumericU8,  FieldFlag_None   ) \
+    HANDLER(GameCardReportMiscFlags,                                  753,  GameCardDetailedErrorInfo,           FieldType_NumericU32, FieldFlag_None   ) \
+    HANDLER(GameCardRemovedTimestamp,                                 754,  GameCardDetailedErrorInfo,           FieldType_NumericI64, FieldFlag_None   ) \
+    HANDLER(GameCardPackageId,                                        755,  GameCardDetailedErrorInfo,           FieldType_U8Array,    FieldFlag_None   ) \
+    HANDLER(GameCardInserted,                                         756,  GameCardDetailedErrorInfo,           FieldType_Bool,       FieldFlag_None   ) \
+    HANDLER(ErptStartupCount,                                         757,  ErrorInfoAuto,                       FieldType_NumericU32, FieldFlag_None   ) \
+    HANDLER(FatSdCardTotalNumberOfLogicalClusters,                    758,  FsProxyErrorInfo2,                   FieldType_NumericU32, FieldFlag_None   ) \
+    HANDLER(FatSdCardBytePerLogicalSector,                            759,  FsProxyErrorInfo2,                   FieldType_NumericU32, FieldFlag_None   ) \
+    HANDLER(FatSdCardLogicalSectorPerCluster,                         760,  FsProxyErrorInfo2,                   FieldType_NumericU32, FieldFlag_None   ) \
+    HANDLER(FatSdCardFormatType,                                      761,  FsProxyErrorInfo2,                   FieldType_NumericU8,  FieldFlag_None   ) \
+    HANDLER(FatSdCardNumberOfFat,                                     762,  FsProxyErrorInfo2,                   FieldType_NumericU8,  FieldFlag_None   ) \
+    HANDLER(FatSdCardSectorPerFat,                                    763,  FsProxyErrorInfo2,                   FieldType_NumericU32, FieldFlag_None   ) \
+    HANDLER(FatSdCardNumberOfReservedSectors,                         764,  FsProxyErrorInfo2,                   FieldType_NumericU32, FieldFlag_None   ) \
+    HANDLER(FatSdCardFirstDataSector,                                 765,  FsProxyErrorInfo2,                   FieldType_NumericU32, FieldFlag_None   ) \
+    HANDLER(FatSdCardTotalNumberOfSectors,                            766,  FsProxyErrorInfo3,                   FieldType_NumericU64, FieldFlag_None   ) \
+    HANDLER(FatSdCardCheckFlags,                                      767,  FsProxyErrorInfo3,                   FieldType_NumericU32, FieldFlag_None   ) \
+    HANDLER(BluetoothHaltedReason,                                    768,  ErrorInfo,                           FieldType_NumericU8,  FieldFlag_None   ) \
+    HANDLER(BluetoothHaltedCurrentPmState,                            769,  ErrorInfo,                           FieldType_NumericU8,  FieldFlag_None   ) \
+    HANDLER(BluetoothHaltedRequestedPmState,                          770,  ErrorInfo,                           FieldType_NumericU8,  FieldFlag_None   ) \
+    HANDLER(BluetoothHaltedBtpApiFailedId,                            771,  ErrorInfo,                           FieldType_NumericU16, FieldFlag_None   ) \
+    HANDLER(RomFsRecoveredAesFailedCount,                             772,  FsProxyErrorInfo3,                   FieldType_NumericU32, FieldFlag_None   ) \
+    HANDLER(DriverRecoveredAesFailedCount,                            773,  FsProxyErrorInfo3,                   FieldType_NumericU32, FieldFlag_None   ) \
+    HANDLER(BluetoothIsHalted,                                        774,  BluetoothErrorInfo,                  FieldType_Bool,       FieldFlag_None   ) \
     HANDLER(TestStringNx,                                             1000, TestNx,                              FieldType_String,     FieldFlag_None   ) \
     HANDLER(BoostModeCurrentLimit,                                    1001, BatteryChargeInfo,                   FieldType_NumericI32, FieldFlag_None   ) \
     HANDLER(ChargeConfiguration,                                      1002, BatteryChargeInfo,                   FieldType_NumericI32, FieldFlag_None   ) \
@@ -909,5 +1002,11 @@
     HANDLER(BluetoothLePairingInfoCount,                              1025, BluetoothPairingCountInfo,           FieldType_NumericU8,  FieldFlag_None   ) \
     HANDLER(NANDPreEolInfo,                                           1026, NANDExtendedCsd,                     FieldType_NumericU32, FieldFlag_None   ) \
     HANDLER(NANDDeviceLifeTimeEstTypA,                                1027, NANDExtendedCsd,                     FieldType_NumericU32, FieldFlag_None   ) \
-    HANDLER(NANDDeviceLifeTimeEstTypB,                                1028, NANDExtendedCsd,                     FieldType_NumericU32, FieldFlag_None   )
+    HANDLER(NANDDeviceLifeTimeEstTypB,                                1028, NANDExtendedCsd,                     FieldType_NumericU32, FieldFlag_None   ) \
+    HANDLER(OscillatorClock,                                          1029, PowerClockInfo,                      FieldType_NumericU32, FieldFlag_None   ) \
+    HANDLER(DramId,                                                   1030, PowerClockInfo,                      FieldType_NumericU32, FieldFlag_None   ) \
+    HANDLER(LastDvfsThresholdTripped,                                 1031, ThermalInfo,                         FieldType_NumericI32, FieldFlag_None   ) \
+    HANDLER(ModuleClockEnableFlags,                                   1032, PowerClockInfo,                      FieldType_U8Array,    FieldFlag_None   ) \
+    HANDLER(ModulePowerEnableFlags,                                   1033, PowerClockInfo,                      FieldType_U8Array,    FieldFlag_None   ) \
+    HANDLER(BluetoothAudioConnectionCount,                            1034, BluetoothAudioInfo,                  FieldType_NumericU8,  FieldFlag_None   )
 

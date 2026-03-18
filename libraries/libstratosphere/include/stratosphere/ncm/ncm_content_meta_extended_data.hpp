@@ -282,7 +282,7 @@ namespace ams::ncm {
             }
 
             const FragmentSet *GetFragmentSet(s32 delta_index, s32 fragment_set_index) const {
-                return reinterpret_cast<const FragmentSet *>(this->GetFragmentSetIndex(delta_index, fragment_set_index));
+                return reinterpret_cast<const FragmentSet *>(this->GetFragmentSetAddress(delta_index, fragment_set_index));
             }
 
             const FragmentIndicator *GetFragmentIndicator(s32 delta_index, s32 fragment_set_index, s32 index) const {
@@ -422,7 +422,7 @@ namespace ams::ncm {
                 public:
                     void Reset() {
                         if (m_accessor != nullptr) {
-                            m_accessor->ReleasePin(m_pin_id);
+                            static_cast<void>(m_accessor->ReleasePin(m_pin_id));
                             m_accessor = nullptr;
                         }
                     }
@@ -479,7 +479,7 @@ namespace ams::ncm {
 
                 /* Mark the memory as in use. */
                 R_RETURN(m_mapper->MarkUsing(memory.id));
-                ON_SCOPE_EXIT { this->ReleasePin(memory.id); };
+                ON_SCOPE_EXIT { static_cast<void>(this->ReleasePin(memory.id)); };
 
                 /* Copy out the struct. */
                 *out = *reinterpret_cast<const T *>(memory.GetBuffer(offset, sizeof(T)));

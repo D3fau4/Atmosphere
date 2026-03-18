@@ -112,7 +112,7 @@ namespace ams::kern::arch::arm64::cpu {
         class KCoreBarrierInterruptHandler : public KInterruptHandler {
             private:
                 util::Atomic<u64> m_target_cores;
-                KSpinLock m_lock;
+                KLightLock m_lock;
             public:
                 constexpr KCoreBarrierInterruptHandler() : KInterruptHandler(), m_target_cores(0), m_lock() { /* ... */ }
 
@@ -123,11 +123,8 @@ namespace ams::kern::arch::arm64::cpu {
                 }
 
                 void SynchronizeCores(u64 core_mask) {
-                    /* Disable dispatch while we synchronize. */
-                    KScopedDisableDispatch dd;
-
                     /* Acquire exclusive access to ourselves. */
-                    KScopedSpinLock lk(m_lock);
+                    KScopedLightLock lk(m_lock);
 
                     /* If necessary, force synchronization with other cores. */
                     if (const u64 other_cores_mask = core_mask & ~(1ul << GetCurrentCoreId()); other_cores_mask != 0) {
@@ -218,7 +215,7 @@ namespace ams::kern::arch::arm64::cpu {
                     KThread::Register(new_thread);
 
                     /* Run the thread. */
-                    new_thread->Run();
+                    MESOSPHERE_R_ABORT_UNLESS(new_thread->Run());
                 }
 
                 virtual KInterruptTask *OnInterrupt(s32 interrupt_id) override {
@@ -511,16 +508,16 @@ namespace ams::kern::arch::arm64::cpu {
         g_cache_operation_handler.Initialize(core_id);
 
         /* Bind all handlers to the relevant interrupts. */
-        Kernel::GetInterruptManager().BindHandler(std::addressof(g_cache_operation_handler),              KInterruptName_CacheOperation,     core_id, KInterruptController::PriorityLevel_High,      false, false);
-        Kernel::GetInterruptManager().BindHandler(std::addressof(g_thread_termination_handler),           KInterruptName_ThreadTerminate,    core_id, KInterruptController::PriorityLevel_Scheduler, false, false);
-        Kernel::GetInterruptManager().BindHandler(std::addressof(g_core_barrier_handler),                 KInterruptName_CoreBarrier,        core_id, KInterruptController::PriorityLevel_Scheduler, false, false);
+        MESOSPHERE_R_ABORT_UNLESS(Kernel::GetInterruptManager().BindHandler(std::addressof(g_cache_operation_handler),              KInterruptName_CacheOperation,     core_id, KInterruptController::PriorityLevel_High,      false, false));
+        MESOSPHERE_R_ABORT_UNLESS(Kernel::GetInterruptManager().BindHandler(std::addressof(g_thread_termination_handler),           KInterruptName_ThreadTerminate,    core_id, KInterruptController::PriorityLevel_Scheduler, false, false));
+        MESOSPHERE_R_ABORT_UNLESS(Kernel::GetInterruptManager().BindHandler(std::addressof(g_core_barrier_handler),                 KInterruptName_CoreBarrier,        core_id, KInterruptController::PriorityLevel_Scheduler, false, false));
 
         /* If we should, enable user access to the performance counter registers. */
         if (KTargetSystem::IsUserPmuAccessEnabled()) { SetPmUserEnrEl0(1ul); }
 
         /* If we should, enable the kernel performance counter interrupt handler. */
         #if defined(MESOSPHERE_ENABLE_PERFORMANCE_COUNTER)
-        Kernel::GetInterruptManager().BindHandler(std::addressof(g_performance_counter_handler[core_id]), KInterruptName_PerformanceCounter, core_id, KInterruptController::PriorityLevel_Timer,     false, false);
+        MESOSPHERE_R_ABORT_UNLESS(Kernel::GetInterruptManager().BindHandler(std::addressof(g_performance_counter_handler[core_id]), KInterruptName_PerformanceCounter, core_id, KInterruptController::PriorityLevel_Timer,     false, false));
         #endif
     }
 

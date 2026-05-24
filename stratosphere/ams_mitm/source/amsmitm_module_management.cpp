@@ -26,7 +26,6 @@
 #include "sysupdater/sysupdater_module.hpp"
 #include "mitm_pm/mitm_pm_module.hpp"
 #include "ssl_mitm/sslmitm_module.hpp"
-#include "nifm_mitm/nifmmitm_module.hpp"
 
 namespace ams::mitm {
 
@@ -42,7 +41,6 @@ namespace ams::mitm {
             ModuleId_Sysupdater,
             ModuleId_PmService,
             ModuleId_SslMitm,
-            ModuleId_NifmMitm,
 
             ModuleId_Count,
         };
@@ -78,7 +76,6 @@ namespace ams::mitm {
             GetModuleDefinition<sysupdater::MitmModule>(),
             GetModuleDefinition<pm::MitmModule>(),
             GetModuleDefinition<ssl::MitmModule>(),
-            GetModuleDefinition<nifm::MitmModule>(),
         };
 
     }
